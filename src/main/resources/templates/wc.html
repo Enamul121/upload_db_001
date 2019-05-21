@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="fragments/header :: head"> </th:block>
+</head>
+<body>
+<div class="container">
+    <br>
+
+    <nav>
+        <th:block th:replace="fragments/nav :: nav"></th:block>
+    </nav>
+     <br>
+    <h1> User Info </h1>
+    <a class="btn btn-primary" th:href="@{/addUserPage}"  role="button" >Add User</a>
+    <br>
+
+    <table class="table table-striped">
+        <thead>
+        <th scope="row">#ID</th>
+        <th scope="row">Name</th>
+        <th scope="row">Profile Picture</th>
+        <th scope="row">Update</th>
+        <th scope="row">Delete</th>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${userLists}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td ><img th:src="@{__${user.img_dir}__}" height="100px" width="100px" ></td>
+            <td><a class="btn btn-primary" href="#"  role="button" >Update</a></td>
+            <td><a class="btn btn-primary" href="#" role="button" >Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <img src="../static/img/mm_26994055339986_.jpg"
+         th:src="@{img/mm_26994055339986_.jpg}" height="200px" width="200px">
+
+    <footer>
+<th:block th:include="fragments/footer :: footer"></th:block>
+    </footer>
+
+</div>
+</body>
+</html>

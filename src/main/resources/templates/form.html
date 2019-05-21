@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="fragments/header :: head"> </th:block>
+</head>
+<body>
+<div class="container">
+    <br>
+    <nav>  <th:block th:replace="fragments/nav :: nav"></th:block>   </nav>
+    <br>
+    <h1>
+        WELCOME TO User ENTRY FORM ::::::::::::::::::::::::::::::::
+    </h1>
+
+    <div class="alert alert-primary" role="alert">
+        A simple primary alert—check it out!
+    </div>
+    <form  th:object="${User}"  method="post" th:action="@{/addUser}"
+           cssClass="form" enctype="multipart/form-data" >
+
+        <input type="hidden" th:field="*{id}"/>
+
+
+        <div class="form-group">
+            <label>Name</label>
+            <input th:field="*{name}" type="text" class="form-control"  />
+        </div>
+        <div class="form-group">
+            <label>Profile Picture</label>
+            <input type="file" class="form-control" name="file" th:name="file" />
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+    <br>
+    <footer>
+
+        <th:block th:include="fragments/footer :: footer"></th:block>
+
+    </footer>
+
+</div>
+</body>
+</html>
