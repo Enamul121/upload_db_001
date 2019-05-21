@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     UserRepo userRepo;
 // /home/enamul/IdeaProjects/new/upload_db_001/src/main/resources
     // /upload
-  String upload_dir = "/img";
+  String upload_dir = "/home/enamul/IdeaProjects/new/upload_db_001/src/main/resources/static/img";
 
 
   public void imgStore(MultipartFile file, String modifiedFileName){
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 
       imgStore(file, modifiedName);
       user.setImg(modifiedName);
-      user.setImg_dir(upload_dir+"/"+modifiedName);
+      user.setImg_dir("/img/"+modifiedName);
       userRepo.save(user);
 
     }
@@ -52,12 +52,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserById(int id) {
-        return null;
+    public User findUserById(Long id) {
+        return userRepo.findById(id).get();
     }
 
     @Override
-    public void deleteUser(int id) {
-
+    public void deleteUser(Long id) {
+      userRepo.deleteById(id);
     }
 }

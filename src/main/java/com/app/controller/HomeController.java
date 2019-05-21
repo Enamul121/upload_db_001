@@ -47,12 +47,10 @@ public class HomeController {
 
     @PostMapping("/addUser")
     public ModelAndView addUser(@Valid User user,@RequestParam("file")MultipartFile file){
-
         try {
             service.saveUser(user,file);
-        }catch (Exception e){e.printStackTrace();}
-
-
+            }
+        catch (Exception e){e.printStackTrace();}
         return new ModelAndView("redirect:/");
     }
 
