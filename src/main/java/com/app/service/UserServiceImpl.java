@@ -20,15 +20,14 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepo userRepo;
-// /home/enamul/IdeaProjects/new/upload_db_001/src/main/resources/upload
-    //    /home/enamul/IdeaProjects/new/upload_db_001/image
+
   String upload_dir = "/home/enamul/IdeaProjects/new/upload_db_001/src/main/resources/static/img";
 
 
+
+
+  //  First Upload file then store it to the server.
   public void imgStore(MultipartFile file, String modifiedFileName){
-    //  String fileName = file.getOriginalFilename();
-   //   String modifiedName = fileName.substring(0,fileName.lastIndexOf("."))+"_" + System.nanoTime() +"_"+
-           //                 fileName.substring(fileName.lastIndexOf("."));
       try (InputStream in = file.getInputStream()){
            Files.copy(in, Paths.get(this.upload_dir + "/" + modifiedFileName), StandardCopyOption.REPLACE_EXISTING);
       }catch (Exception e){e.printStackTrace();}
@@ -61,7 +60,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Long id) {
-      // First delete image from Directory
+      // First delete image from Directory then delete path from the database
         User user = findUserById(id);
         File file = new File("/home/enamul/IdeaProjects/new/upload_db_001/src/main/resources/static" + user.getImg_dir());
         file.delete();
