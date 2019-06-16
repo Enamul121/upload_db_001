@@ -1,6 +1,7 @@
 package com.app.service;
 
 import com.app.domain.User;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -14,5 +15,7 @@ public interface UserService {
   User findUserById(Long id);
 
   void deleteUser(Long id);
+
+  List<User> nativeTest();
 
 }

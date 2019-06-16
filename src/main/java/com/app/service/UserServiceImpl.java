@@ -4,8 +4,10 @@ import com.app.domain.User;
 import com.app.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -13,12 +15,13 @@ import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepo userRepo;
-// /home/enamul/IdeaProjects/new/upload_db_001/src/main/resources
-    // /upload
+// /home/enamul/IdeaProjects/new/upload_db_001/src/main/resources/upload
+    //    /home/enamul/IdeaProjects/new/upload_db_001/image
   String upload_dir = "/home/enamul/IdeaProjects/new/upload_db_001/src/main/resources/static/img";
 
 
@@ -58,6 +61,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Long id) {
+      // First delete image from Directory
+        User user = findUserById(id);
+        File file = new File("/home/enamul/IdeaProjects/new/upload_db_001/src/main/resources/static" + user.getImg_dir());
+        file.delete();
       userRepo.deleteById(id);
+    }
+
+
+
+    // JPQL TEST
+   @Override
+    public List<User> nativeTest() {
+        return userRepo.likeQueryNative();
     }
 }

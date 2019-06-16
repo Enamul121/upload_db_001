@@ -1,9 +1,6 @@
 package com.app.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -20,12 +17,16 @@ public class User {
 
     private String img_dir;
 
+    @Embedded
+    private Address address;
+
     public User() { }
 
-    public User(String name, String img, String img_dir) {
+    public User(String name, String img, String img_dir, Address address) {
         this.name = name;
         this.img = img;
         this.img_dir = img_dir;
+        this.address = address;
     }
 
     public Long getId() {
@@ -60,8 +61,22 @@ public class User {
         this.img_dir = img_dir;
     }
 
-  /*  public Path getFilePath() {
-        if (img == null || img_dir == null) { return null; }
-        return Paths.get(img_dir, img);
-    }*/
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", img='" + img + '\'' +
+                ", img_dir='" + img_dir + '\'' +
+                ", address=" + address +
+                '}';
+    }
 }

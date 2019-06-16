@@ -26,7 +26,14 @@
         <tr th:each="user : ${userLists}">
             <td th:text="${user.id}"></td>
             <td th:text="${user.name}"></td>
-            <td ><img th:src="@{__${user.img_dir}__}" height="100px" width="100px" ></td>
+            <td >
+              <video id="video1" controls autoplay="false" width="500px" height="400px" >
+                    <source th:src="@{__${user.img_dir}__}" type="video/mp4">
+                    your browser does not support this type of video
+                </video>
+             <!--   <img th:src="@{__${user.img_dir}__}" height="100px" width="100px" >-->
+
+            </td>
             <td><a class="btn btn-primary" th:href="@{/updateUser/__${user.id}__}"  role="button" >Update</a> ||
                 <a class="btn btn-primary"th:href="@{/deleteUser/__${user.id}__}"  role="button" >Delete</a></td>
 
@@ -34,8 +41,8 @@
         </tbody>
     </table>
     <br>
-    <img src="../static/img/mm_26994055339986_.jpg"
-         th:src="@{/img/mm_26994055339986_.jpg}" height="200px" width="200px">
+    <!--<img src="../static/img/mm_26994055339986_.jpg"
+         th:src="@{/img/mm_26994055339986_.jpg}" height="200px" width="200px">-->
 
     <footer>
 <th:block th:include="fragments/footer :: footer"></th:block>
